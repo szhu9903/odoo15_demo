@@ -1,0 +1,164 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="myblog_blog_form">
+            <field name="name">文章</field>
+            <field name="model">myblog.blog</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <label for="blog_title" class="oe_edit_only"/>
+                        <field name="priority" widget="priority"/>
+                        <h1 class="d-flex flex-row justify-content-between">
+                            <field name="blog_title"  class="o_task_name text-truncate" placeholder="Task Title..."/>
+                            <field name="kanban_state" widget="state_selection" class="ml-auto"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="blog_brief"/>
+                                <field name="blog_cover" />
+                                <field name="author_id" />
+                                <field name="blog_type" />
+                            </group>
+                            <group>
+                                <field name="blog_views"/>
+                                <field name="blog_comment_count"/>
+                                <field name="blog_like_count"/>
+                                <field name="create_date"/>
+                                <field name="blog_data" widget='image' class="oe_avatar oe_left" />
+                            </group>
+                        </group>
+                            <field name="blog_content"/>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="myblog_blog_list">
+            <field name="name">文章</field>
+            <field name="model">myblog.blog</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="blog_title"/>
+                    <field name="blog_brief" />
+                    <field name="blog_cover" />
+                    <field name="blog_type" />
+                    <field name="author_id" />
+                    <field name="blog_views" />
+                    <field name="blog_comment_count" />
+                    <field name="blog_like_count" />
+                    <field name="create_date" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="my_user_kanban" model="ir.ui.view">
+            <field name="name">文章</field>
+            <field name="model">myblog.blog</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="blog_type" class="o_kanban_small_column">
+                    <field name="color"/>
+                    <field name="blog_type"/>
+                    <field name="author_id"/>
+                    <field name="blog_title"/>
+                    <field name="kanban_state"/>
+                    <field name="priority"/>
+                    <!--进度条-->
+                    <progressbar field="kanban_state" colors='{"done":"success","blocked":"danger"}' />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+                                  <!--top-right drop down menu here-->
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" data-display="static" aria-label="Dropdown menu"  title="下拉菜单" href="#">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu">
+                                        <t t-if="widget.editable">
+                                            <a role="menuitem" type="edit" class="dropdown-item">编辑</a>
+                                        </t>
+                                        <t t-if="widget.deletable">
+                                            <a role="menuitem" type="delete" class="dropdown-item">删除</a>
+                                        </t>
+                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                    </div>
+                                </div>
+
+                                <div class="oe_kanban_body">
+                                    <div>
+                                        <strong>
+                                            <!--t-attf- 该指令查找表达式代码块进行运行并替换结果-->
+                                            <a type="open" t-attf-class="oe_kanban_text_{{
+                                            record.priority.raw_value lt 2
+                                            ? 'black':'red'}}">
+                                                <field name="blog_title" />
+                                            </a>
+                                        </strong>
+                                    </div>
+                                    <ul>
+                                        <li><field name="blog_brief" /></li>
+                                        <li><field name="author_id" /></li>
+                                    </ul>
+                                </div>
+
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="priority" widget="priority"/>
+                                        <!--使用kanban_activity特殊组件来显示即将开始活动的指示-->
+                                        <field name="activity_ids" widget="kanban_activity"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="kanban_state" widget="kanban_state_selection" />
+                                        <img t-att-src="kanban_image(
+                                        'myblog.blog.user',
+                                        'image_1920',
+                                        record.author_id.raw_value)"
+                                             t-att-title="record.author_id.value"
+                                             t-att-alt="record.author_id.value"
+                                             class="oe_kanban_avatar"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="oe_clear"></div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="myblog_blog_filter">
+            <field name="name">文章</field>
+            <field name="model">myblog.blog</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="blog_title"/>
+                    <filter name="del_blog" string="有效文章" domain="[('del_flag','=',0)]" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="action_myblog_blog_done">
+            <field name="name">下载封面</field>
+            <field name="model_id" ref="model_myblog_blog"/>
+            <field name="binding_model_id" ref="model_myblog_blog"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.get_blog_data()
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="myblog_blog_action_window">
+            <field name="name">文章</field>
+            <field name="res_model">myblog.blog</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context" eval="{'search_default_del_blog':1}" />
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="myblog_blog_user_form">
+            <field name="name">用户</field>
+            <field name="model">myblog.blog.user</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <label for="account" class="oe_edit_only"/>
+                            <h1>
+                                <field name="account"/>
+                            </h1>
+                        <group>
+                            <field name="account"/>
+                            <field name="github_token"/>
+                            <field name="pwd"/>
+                            <field name="user_photo"/>
+                        </group>
+                        <group>
+                            <field name="user_name"/>
+                            <field name="sex"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="myblog_blog_user_list">
+            <field name="name">用户</field>
+            <field name="model">myblog.blog.user</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="user_name"/>
+                    <field name="account" />
+                    <field name="sex" />
+                    <field name="phone" />
+                    <field name="email" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="myblog_blog_user_filter">
+            <field name="name">用户</field>
+            <field name="model">myblog.blog.user</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="account"/>
+                    <filter name="del_blog_user" string="有效用户" domain="[('del_flag','=',0)]" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="myblog_blog_user_action_window">
+            <field name="name">用户</field>
+            <field name="res_model">myblog.blog.user</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_del_blog_user':1}" />
+        </record>
+    </data>
+</odoo>

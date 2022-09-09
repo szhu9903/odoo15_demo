@@ -1,0 +1,11 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+
+view_group_myblog_blog,BlogView,myblog.model_myblog_blog,myblog_view_group,1,0,0,0
+admin_group_myblog_blog,BlogAdmin,myblog.model_myblog_blog,myblog_admin_group,1,1,1,1
+
+view_group_myblog_blog_user,BlogUserView,myblog.model_myblog_blog_user,myblog_view_group,1,0,0,0
+admin_group_myblog_blog_user,BlogUserAdmin,myblog.model_myblog_blog_user,myblog_admin_group,1,1,1,1
+
+view_group_myblog_blog_type,BlogTypeView,myblog.model_myblog_blog_type,myblog_view_group,1,0,0,0
+admin_group_myblog_blog_type,BlogTypeAdmin,myblog.model_myblog_blog_type,myblog_admin_group,1,1,1,1
+

@@ -1,0 +1,30 @@
+<?xml version="1.1" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--
+            field:
+                name: 组名称
+                comment: 描述
+                category_id: 关联我们创建的应用ID
+                implied_ids: 继承组
+                users: 添加用户
+        -->
+        <record id="myblog_view_group" model="res.groups">
+            <field name="name">Blog访问</field>
+            <field name="comment">访问view</field>
+            <field name="category_id" ref="base.module_category_mydemo_myblog" />
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        </record>
+
+        <record id="myblog_admin_group" model="res.groups">
+            <field name="name">Blog管理员</field>
+            <field name="comment">管理</field>
+            <field name="category_id" ref="base.module_category_mydemo_myblog" />
+            <field name="implied_ids" eval="[(4, ref('myblog_view_group'))]" />
+            <field name="users"
+                   eval="[(4, ref('base.user_root')),
+                   (4, ref('base.user_admin'))]" />
+        </record>
+
+    </data>
+</odoo>
