@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="hardware_list_template" name="Equip List">
+        <div id="wrap" class="container">
+            <h1>设备</h1>
+            <t t-foreach="hardwares" t-as="hardware">
+                <div class="row">
+                    <span t-field="hardware.he_name" />,
+                    <span t-field="hardware.he_num" />
+                </div>
+            </t>
+        </div>
+    </template>
+</odoo>

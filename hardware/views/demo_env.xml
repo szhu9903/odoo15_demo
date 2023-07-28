@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<!--    <record id="view_form_hardware_configvar" model="ir.ui.view">-->
+<!--        <field name="name">设备类型</field>-->
+<!--        <field name="model">hardware.hardware.configvar</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="configvar">-->
+<!--                <sheet>-->
+<!--                    &lt;!&ndash; 内容放在这里： &ndash;&gt;-->
+<!--                    <group name="group_top">-->
+<!--                        <group name="group_left">-->
+<!--                            <field name="ht_name"/>-->
+<!--                        </group>-->
+<!--                        <group name="group_right">-->
+<!--                            <field name="ht_code_down"/>-->
+<!--                            <field name="ht_code_up"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="view_tree_demo_env" model="ir.ui.view">
+        <field name="name">环境数据</field>
+        <field name="model">hardware.demo.env</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="de_equipid" widget="many2one_tags"/>
+                <field name="de_equipcode"/>
+                <field name="de_temperature"/>
+                <field name="de_humidity"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_search_demo_env" model="ir.ui.view">
+        <field name="name">环境数据</field>
+        <field name="model">hardware.demo.env</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="de_equipcode" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_demo_env" model="ir.actions.act_window">
+        <field name="name">环境数据</field>
+        <field name="res_model">hardware.demo.env</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

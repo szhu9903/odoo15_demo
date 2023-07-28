@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_form_sys_role" model="ir.ui.view">
+        <field name="name">角色</field>
+        <field name="model">hardware.sys.role</field>
+        <field name="arch" type="xml">
+            <form string="Role">
+                <sheet>
+                    <!-- 内容放在这里： -->
+                    <group name="group_role">
+                        <field name="sr_name"/>
+                        <field name="user_ids"/>
+                        <field name="purview_ids"/>
+                        <field name="menu_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_sys_role" model="ir.ui.view">
+        <field name="name">角色</field>
+        <field name="model">hardware.sys.role</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sr_name"/>
+                <field name="user_ids" widget="many2many_tags"/>
+                <field name="purview_ids" widget="many2many_tags"/>
+                <field name="menu_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sys_role" model="ir.actions.act_window">
+        <field name="name">角色</field>
+        <field name="res_model">hardware.sys.role</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

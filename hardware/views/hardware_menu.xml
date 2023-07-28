@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!--
+        id: 菜单唯一标识
+        name: 菜单名称
+        parent: 上级菜单
+        action: 选中菜单要跳转的页面，关联到你创建的视图的ir.actions.act_window入口的ID
+        sequence: 顺序
+    -->
+    <menuitem id="menu_hardware" name="设备控制系统" sequence="0" web_icon="order,static/src/img/order.png"/>
+        <menuitem id="menu_hardware_hardware" name="基础设备管理" parent="menu_hardware" sequence="0"/>
+            <menuitem id="menu_hardware_hardware_equip" name="设备列表" parent="menu_hardware_hardware" action="action_hardware_equip" sequence="0"/>
+            <menuitem id="menu_hardware_hardware_type" name="设备类型" parent="menu_hardware_hardware" action="action_hardware_type" sequence="1"/>
+            <menuitem id="menu_hardware_hardware_configvar" name="设备配置项" parent="menu_hardware_hardware" action="action_hardware_configvar" sequence="2"/>
+
+        <menuitem id="menu_hardware_sys" name="基础信息" parent="menu_hardware" sequence="1"/>
+            <menuitem id="menu_hardware_sys_user" name="用户信息" parent="menu_hardware_sys" action="action_sys_user" sequence="0"/>
+            <menuitem id="menu_hardware_sys_role" name="角色信息" parent="menu_hardware_sys" action="action_sys_role" sequence="1"/>
+            <menuitem id="menu_hardware_sys_purview" name="api权限" parent="menu_hardware_sys" action="action_sys_purview" sequence="2"/>
+            <menuitem id="menu_hardware_sys_menu" name="后台管理菜单" parent="menu_hardware_sys" action="action_sys_menu" sequence="3"/>
+
+        <menuitem id="menu_hardware_demo" name="Demo设备" parent="menu_hardware" sequence="2"/>
+            <menuitem id="menu_hardware_demo_env" name="环境数据" parent="menu_hardware_demo" action="action_demo_env" sequence="0"/>
+            <menuitem id="menu_hardware_demo_led" name="LED控制" parent="menu_hardware_demo" action="action_demo_led" sequence="1"/>
+
+        <menuitem id="menu_hardware_full103" name="Full103设备" parent="menu_hardware" sequence="3"/>
+            <menuitem id="menu_hardware_full103_env" name="环境数据" parent="menu_hardware_full103" action="action_full103_env" sequence="0"/>
+            <menuitem id="menu_hardware_full103_relay" name="继电器控制" parent="menu_hardware_full103" action="action_full103_relay" sequence="1"/>
+<!--        <menuitem id="menu_myblog_blog_user" name="用户" parent="menu_myblog" action="myblog_blog_user_action_window" sequence="1"/>-->
+<!--        <menuitem id="menu_myblog_blog_type" name="博文分类" parent="menu_myblog" action="myblog_blog_type_action_window" sequence="2"/>-->
+</odoo>
